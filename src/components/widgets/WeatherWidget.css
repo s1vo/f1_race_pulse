@@ -1,0 +1,134 @@
+.weather-widget {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+  animation: fadeIn 0.5s ease;
+  min-height: 220px;
+}
+
+.weather-widget__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 4px;
+}
+
+.weather-widget__label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 1.5px;
+  color: var(--text-muted);
+}
+
+.weather-widget__icon {
+  font-size: 1.5rem;
+}
+
+.weather-widget__location {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 1.6rem;
+  color: var(--text-primary);
+  margin-bottom: 10px;
+  line-height: 1.1;
+}
+
+.weather-widget__status-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.weather-widget__condition {
+  font-family: 'Barlow', sans-serif;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+}
+
+.weather-widget__source {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.weather-widget__source--live {
+  color: var(--accent-teal);
+  background: rgba(0, 210, 190, 0.08);
+  border-color: rgba(0, 210, 190, 0.2);
+}
+
+.weather-widget__source--forecast {
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.weather-widget__temps {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 16px;
+}
+
+.weather-widget__temp {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.weather-widget__temp-value {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 2.2rem;
+  color: var(--text-primary);
+  line-height: 1;
+}
+
+.weather-widget__temp-unit {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1rem;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+.weather-widget__temp-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+  width: 100%;
+  margin-top: 4px;
+}
+
+.weather-widget__extra {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+.weather-widget__no-data {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  padding: 16px 0 8px;
+}
+
+@media (max-width: 768px) {
+  .weather-widget__status-row,
+  .weather-widget__temps {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

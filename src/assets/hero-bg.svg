@@ -1,0 +1,68 @@
+<svg width="1600" height="720" viewBox="0 0 1600 720" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1600" height="720" fill="#12121A"/>
+  <rect width="1600" height="720" fill="url(#bgGlow)"/>
+  <g opacity="0.9">
+    <ellipse cx="1218" cy="232" rx="330" ry="196" fill="url(#sunGlow)"/>
+    <ellipse cx="1328" cy="274" rx="236" ry="132" fill="url(#accentGlow)"/>
+  </g>
+
+  <g opacity="0.18">
+    <circle cx="1328" cy="336" r="292" stroke="white" stroke-width="12"/>
+    <circle cx="1328" cy="336" r="360" stroke="white" stroke-width="6" stroke-dasharray="4 20"/>
+    <circle cx="1328" cy="336" r="404" stroke="white" stroke-width="4" stroke-dasharray="2 24"/>
+  </g>
+
+  <g opacity="0.24">
+    <path d="M1008 176C1100.72 121.018 1199.85 110.372 1305.39 144.063C1404.92 175.833 1474.74 240.39 1514.84 337.734C1542.51 404.899 1541.2 469.916 1510.9 532.785C1476.66 603.812 1413.41 649.34 1321.16 669.368" stroke="white" stroke-width="18" stroke-linecap="round"/>
+    <path d="M1058 194C1144.78 149.591 1230.07 146.866 1313.85 185.826C1394.83 223.484 1451.46 285.594 1483.75 372.157C1506.45 433.011 1504.86 488.365 1478.98 538.221C1446.45 600.94 1388.91 639.483 1306.36 653.85" stroke="white" stroke-width="8" stroke-linecap="round" stroke-dasharray="5 22"/>
+  </g>
+
+  <g opacity="0.95">
+    <path d="M1062 430C1095.46 365.433 1161.42 321.822 1259.89 299.167C1327.63 283.582 1411.19 282.093 1510.57 294.7C1534.31 297.712 1552.9 306.34 1566.34 320.584C1578.75 333.736 1583.41 348.283 1580.31 364.225C1577.14 380.543 1568.52 392.011 1554.47 398.629C1542.15 404.432 1527.54 406.182 1510.64 403.881L1400.85 388.92C1389.86 387.423 1379.87 387.944 1370.89 390.481C1362.95 392.724 1355.62 396.909 1348.9 403.038L1312.73 436.743C1303.22 445.392 1288.78 448.427 1269.42 445.849L1170.47 432.688C1142.68 428.994 1120.88 421.694 1105.06 410.789C1088.33 399.259 1081.31 385.359 1084.02 369.091C1085.48 360.341 1089.97 352.55 1097.49 345.716C1107.04 337.03 1120.86 331.431 1138.95 328.92L1177.29 323.627C1180.09 323.24 1181.73 321.855 1182.2 319.472C1183.45 313.203 1173.46 307.857 1152.21 303.433C1095.03 291.531 1047.13 298.132 1008.52 323.237L1062 430Z" fill="url(#carBody)"/>
+    <path d="M1097 373C1134.77 393.66 1172.73 406.451 1210.89 411.373L1273.48 419.452C1287.86 421.309 1298.87 418.76 1306.52 411.803L1344.88 376.787C1359.61 363.628 1381.59 358.918 1410.82 362.655L1502.64 374.391C1528.85 377.742 1543.87 370.38 1547.68 352.306C1551.09 336.14 1542.72 322.648 1522.57 311.831C1508.54 304.3 1492.42 299.266 1474.2 296.729L1389.35 284.927C1375.15 282.953 1361.48 283.303 1348.33 285.978C1335.75 288.538 1326.49 292.591 1320.54 298.137L1283.47 332.764C1273.94 341.36 1259.76 344.349 1240.93 341.731L1156.27 329.96C1141.82 327.951 1130.82 328.395 1123.28 331.291C1112.28 335.515 1105.14 343.631 1101.85 355.639C1100.22 361.571 1098.6 367.358 1097 373Z" fill="#F8F8FA" opacity="0.14"/>
+    <ellipse cx="1188" cy="472" rx="76" ry="76" fill="#171720"/>
+    <ellipse cx="1188" cy="472" rx="46" ry="46" fill="#090910"/>
+    <ellipse cx="1458" cy="506" rx="90" ry="90" fill="#171720"/>
+    <ellipse cx="1458" cy="506" rx="54" ry="54" fill="#090910"/>
+    <path d="M1366 334H1512" stroke="#FF4D45" stroke-width="8" stroke-linecap="round" opacity="0.68"/>
+    <path d="M1306 280H1412" stroke="#FF4D45" stroke-width="7" stroke-linecap="round" opacity="0.46"/>
+    <path d="M1422 487H1510" stroke="#D9D9E3" stroke-width="4" stroke-linecap="round" opacity="0.18"/>
+  </g>
+
+  <g opacity="0.22">
+    <rect x="1100" y="92" width="30" height="30" rx="3" fill="white"/>
+    <rect x="1136" y="92" width="30" height="30" rx="3" fill="#E10600"/>
+    <rect x="1172" y="92" width="30" height="30" rx="3" fill="white"/>
+    <rect x="1208" y="92" width="30" height="30" rx="3" fill="#E10600"/>
+    <rect x="1120" y="128" width="30" height="30" rx="3" fill="#E10600"/>
+    <rect x="1156" y="128" width="30" height="30" rx="3" fill="white"/>
+    <rect x="1192" y="128" width="30" height="30" rx="3" fill="#E10600"/>
+    <rect x="1228" y="128" width="30" height="30" rx="3" fill="white"/>
+  </g>
+
+  <g opacity="0.18">
+    <path d="M1262 584L1532 584" stroke="white" stroke-width="7" stroke-linecap="round"/>
+    <path d="M1210 610L1490 610" stroke="white" stroke-width="3" stroke-dasharray="10 14" stroke-linecap="round"/>
+    <path d="M1268 258L1400 258" stroke="white" stroke-width="3" stroke-dasharray="1 16" stroke-linecap="round"/>
+  </g>
+
+  <defs>
+    <radialGradient id="bgGlow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1224 212) rotate(90) scale(350 620)">
+      <stop stop-color="#2A1418" stop-opacity="0.74"/>
+      <stop offset="1" stop-color="#12121A" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="sunGlow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1218 232) rotate(90) scale(196 330)">
+      <stop stop-color="#704A4E"/>
+      <stop offset="1" stop-color="#12121A" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="accentGlow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1328 274) rotate(90) scale(132 236)">
+      <stop stop-color="#E10600" stop-opacity="0.46"/>
+      <stop offset="1" stop-color="#12121A" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="carBody" x1="1008.52" y1="294.7" x2="1581.22" y2="445.998" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F8F8FA" stop-opacity="0.92"/>
+      <stop offset="0.52" stop-color="#CFCFD8" stop-opacity="0.76"/>
+      <stop offset="1" stop-color="#6B707C" stop-opacity="0.22"/>
+    </linearGradient>
+  </defs>
+</svg>

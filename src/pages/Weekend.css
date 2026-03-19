@@ -1,0 +1,123 @@
+.weekend {
+  animation: fadeIn 0.4s ease;
+}
+
+.weekend__title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 1.8rem;
+  color: var(--text-primary);
+  margin: 0;
+  letter-spacing: 1px;
+}
+
+.weekend__subtitle {
+  font-family: 'Barlow', sans-serif;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin: 4px 0 24px;
+}
+
+.weekend__sessions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.weekend__session {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 20px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  transition: all 0.2s ease;
+  animation: fadeIn 0.4s ease both;
+}
+
+.weekend__session--completed:hover {
+  border-color: var(--accent-teal);
+  background: rgba(0, 210, 190, 0.03);
+}
+
+.weekend__session--live {
+  border-color: var(--accent-red);
+  background: rgba(225, 6, 0, 0.04);
+}
+
+.weekend__session-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.weekend__session-type {
+  font-family: 'Barlow', sans-serif;
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.weekend__session-name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--text-primary);
+}
+
+.weekend__session-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.weekend__session-time {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.weekend__session-status {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 0.7rem;
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.weekend__session-status--completed { color: var(--text-muted); }
+.weekend__session-status--live { color: var(--accent-red); }
+.weekend__session-status--upcoming { color: var(--accent-teal); }
+
+.weekend__live-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-red);
+  animation: pulse 1.5s ease infinite;
+}
+
+@media (max-width: 640px) {
+  .weekend__title {
+    font-size: 1.35rem;
+  }
+
+  .weekend__subtitle {
+    margin-bottom: 18px;
+  }
+
+  .weekend__session {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 16px;
+  }
+
+  .weekend__session-right {
+    align-items: flex-start;
+  }
+}

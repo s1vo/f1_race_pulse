@@ -1,0 +1,28 @@
+.timing-cell {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  font-weight: 500;
+  padding: 2px 6px;
+  border-radius: 3px;
+}
+
+.timing-cell--purple {
+  color: #d946ef;
+  background: rgba(217, 70, 239, 0.1);
+}
+
+.timing-cell--green {
+  color: #22c55e;
+  background: rgba(34, 197, 94, 0.1);
+}
+
+.timing-cell--yellow {
+  color: var(--text-primary);
+}
+
+.timing-cell--pit {
+  color: var(--accent-red);
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.5px;
+}

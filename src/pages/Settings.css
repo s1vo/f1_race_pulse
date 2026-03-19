@@ -1,0 +1,115 @@
+.settings-page {
+  animation: fadeIn 0.4s ease;
+  max-width: 500px;
+}
+
+.settings-page__title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 1.6rem;
+  color: var(--text-primary);
+  margin: 0 0 32px 0;
+  letter-spacing: 1px;
+}
+
+.settings-page__section {
+  margin-bottom: 28px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--border);
+}
+
+.settings-page__label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 1.5px;
+  color: var(--text-muted);
+  margin: 0 0 12px 0;
+}
+
+.settings-page__toggle {
+  display: flex;
+  gap: 4px;
+  background: var(--card-bg);
+  border-radius: 8px;
+  padding: 4px;
+  border: 1px solid var(--border);
+  width: fit-content;
+}
+
+.settings-page__option {
+  padding: 8px 20px;
+  border: none;
+  background: none;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  cursor: pointer;
+  border-radius: 6px;
+  transition: all 0.15s;
+}
+
+.settings-page__option--active {
+  background: var(--accent-red);
+  color: #fff;
+}
+
+.settings-page__option:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.settings-page__select {
+  width: 100%;
+  padding: 10px 14px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text-primary);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  cursor: pointer;
+  outline: none;
+  appearance: none;
+}
+
+.settings-page__select:focus {
+  border-color: var(--accent-teal);
+}
+
+.settings-page__hint {
+  font-family: 'Barlow', sans-serif;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin: 8px 0 0;
+}
+
+.settings-page__about {
+  font-family: 'Barlow', sans-serif;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin: 0;
+}
+
+@media (max-width: 640px) {
+  .settings-page {
+    max-width: none;
+  }
+
+  .settings-page__title {
+    font-size: 1.25rem;
+    margin-bottom: 24px;
+  }
+
+  .settings-page__toggle {
+    width: 100%;
+  }
+
+  .settings-page__option {
+    flex: 1;
+    padding: 8px 12px;
+  }
+}
