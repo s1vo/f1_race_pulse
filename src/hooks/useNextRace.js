@@ -1,18 +1,15 @@
 import { useState, useEffect } from 'react';
 import { getMeetings, getSessions, getSessionResults, getDrivers } from '../services/openf1';
 import { showToast } from '../components/common/Toast';
-
-function sortSessionsByStart(sessions = []) {
-  return [...sessions].sort((a, b) => new Date(a.date_start) - new Date(b.date_start));
-}
-
-function findRaceSession(sessions = []) {
-  return sessions.find(session =>
-    session.session_name === 'Race' ||
-    session.session_type === 'Race' ||
-    /grand prix|race/i.test(session.session_name || '')
-  ) || null;
-}
+import {
+  findCurrentMeeting,
+  findLastCompletedMeeting,
+  findMainRaceSession,
+  findNextMeeting,
+  isSessionCompleted,
+  sortMeetingsByStart,
+  sortSessionsByStart,
+} from '../utils/raceSessions';
 
 function buildDriverMap(drivers = []) {
   return (drivers || []).reduce((acc, driver) => {
@@ -70,43 +67,55 @@ export default function useNextRace() {
         }
 
         const now = new Date();
-        const sorted = [...meetings].sort(
-          (a, b) => new Date(a.date_start) - new Date(b.date_start)
+        const sortedMeetings = sortMeetingsByStart(meetings || []);
+        const currentMeeting = findCurrentMeeting(sortedMeetings, now);
+        const upcoming = findNextMeeting(sortedMeetings, now);
+        const fallbackNextRace = upcoming || sortedMeetings[sortedMeetings.length - 1] || null;
+        const lastCompletedMeeting = findLastCompletedMeeting(sortedMeetings, now);
+
+        setNextRace(fallbackNextRace);
+        setRoundNumber(
+          upcoming
+            ? sortedMeetings.findIndex(meeting => meeting.meeting_key === upcoming.meeting_key) + 1
+            : sortedMeetings.length
         );
 
-        // Find the next upcoming meeting (whose date_end hasn't passed yet)
-        const upcomingIdx = sorted.findIndex(m => {
-          const end = m.date_end ? new Date(m.date_end) : new Date(new Date(m.date_start).getTime() + 3 * 24 * 60 * 60 * 1000);
-          return end > now;
-        });
-
-        const upcoming = upcomingIdx >= 0 ? sorted[upcomingIdx] : null;
-        const past = sorted.filter(m => new Date(m.date_start) <= now);
-        const lastPast = past[past.length - 1];
-
-        // If the last past meeting is also "upcoming" (weekend in progress), pick the one before
-        const actualLast = (upcoming && lastPast && upcoming.meeting_key === lastPast.meeting_key)
-          ? past[past.length - 2] || null
-          : lastPast || null;
-
-        setNextRace(upcoming || sorted[sorted.length - 1]);
-        setRoundNumber(upcomingIdx >= 0 ? upcomingIdx + 1 : sorted.length);
-        setLastRace(actualLast);
-
-        const [upcomingSessions, previousSessions] = await Promise.all([
-          upcoming ? getSessions(upcoming.meeting_key) : Promise.resolve([]),
-          actualLast ? getSessions(actualLast.meeting_key) : Promise.resolve([]),
-        ]);
+        const meetingKeys = [fallbackNextRace, currentMeeting, lastCompletedMeeting]
+          .filter(Boolean)
+          .map(meeting => meeting.meeting_key)
+          .filter((meetingKey, index, list) => list.indexOf(meetingKey) === index);
+        const sessionEntries = await Promise.all(
+          meetingKeys.map(async meetingKey => [
+            meetingKey,
+            sortSessionsByStart(await getSessions(meetingKey)),
+          ])
+        );
 
         if (!active) return;
 
-        const sortedUpcomingSessions = sortSessionsByStart(upcomingSessions || []);
-        const sortedPreviousSessions = sortSessionsByStart(previousSessions || []);
+        const sessionsByMeetingKey = Object.fromEntries(sessionEntries);
+        const sortedUpcomingSessions = fallbackNextRace
+          ? sessionsByMeetingKey[fallbackNextRace.meeting_key] || []
+          : [];
+        const currentMeetingSessions = currentMeeting
+          ? sessionsByMeetingKey[currentMeeting.meeting_key] || []
+          : [];
+        const currentMeetingRace = findMainRaceSession(currentMeetingSessions);
+        const useCurrentMeetingAsLastRace = !!(
+          currentMeeting &&
+          currentMeetingRace &&
+          isSessionCompleted(currentMeetingRace, now)
+        );
+        const resolvedLastRace = useCurrentMeetingAsLastRace ? currentMeeting : lastCompletedMeeting;
+        const sortedPreviousSessions = resolvedLastRace
+          ? sessionsByMeetingKey[resolvedLastRace.meeting_key] || []
+          : [];
 
         setNextRaceSessions(sortedUpcomingSessions);
         setLastRaceSessions(sortedPreviousSessions);
+        setLastRace(resolvedLastRace);
 
-        const raceSession = findRaceSession(sortedPreviousSessions);
+        const raceSession = findMainRaceSession(sortedPreviousSessions);
         if (raceSession) {
           try {
             const [results, drivers] = await Promise.all([

@@ -11,6 +11,7 @@ import WeatherWidget from '../components/widgets/WeatherWidget';
 import LiveTiming from '../components/widgets/LiveTiming';
 import IncidentsLog from '../components/widgets/IncidentsLog';
 import Skeleton from '../components/common/Skeleton';
+import { findMainRaceSession } from '../utils/raceSessions';
 import './Dashboard.css';
 
 function formatGapDisplay(gap) {
@@ -75,7 +76,7 @@ export default function Dashboard() {
   // Countdown timer — target the Race session start
   useEffect(() => {
     if (!nextRace) return;
-    const raceSession = nextRaceSessions?.find(s => s.session_name === 'Race');
+    const raceSession = findMainRaceSession(nextRaceSessions || []);
     const targetDate = raceSession?.date_start || nextRace.date_start;
 
     const tick = () => setCountdown(getCountdown(targetDate));
@@ -101,7 +102,7 @@ export default function Dashboard() {
   const country = nextRace?.country_name || '';
   const location = nextRace?.location || '';
 
-  const raceSession = orderedNextRaceSessions.find(s => s.session_name === 'Race');
+  const raceSession = findMainRaceSession(orderedNextRaceSessions);
   const raceDate = raceSession?.date_start || nextRace?.date_start;
   const weatherTargetSession = orderedNextRaceSessions.find(s => new Date(s.date_end) > new Date()) || raceSession || orderedNextRaceSessions[0] || null;
   const weatherTargetDate = liveSessionKey

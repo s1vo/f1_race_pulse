@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { getSessionResults, getMeetings, getSessions, getDrivers } from '../services/openf1';
+import { getDrivers, getLatestCompletedRaceSession, getSessionResults } from '../services/openf1';
 import { useAppContext } from '../context/AppContext';
 import { getTeamColor } from '../utils/teams';
 import { SkeletonTable } from '../components/common/Skeleton';
@@ -30,21 +30,13 @@ export default function Results() {
         let sessionName = '';
 
         if (!key) {
-          const meetings = await getMeetings();
-          const now = new Date();
-          const past = meetings
-            ?.filter(m => new Date(m.date_start) <= now)
-            .sort((a, b) => new Date(b.date_start) - new Date(a.date_start));
+          const { meeting, raceSession } = await getLatestCompletedRaceSession();
 
-          if (past && past.length > 0) {
-            meetingName = past[0].meeting_name;
-            const sess = await getSessions(past[0].meeting_key);
-            const race = sess?.find(s => s.session_name === 'Race');
-            if (race) {
-              key = race.session_key;
-              sessionName = race.session_name;
-              setSessionInfo(`${meetingName} — ${sessionName}`);
-            }
+          if (meeting && raceSession) {
+            key = raceSession.session_key;
+            meetingName = meeting.meeting_name;
+            sessionName = raceSession.session_name;
+            setSessionInfo(`${meetingName} — ${sessionName}`);
           }
         }
 

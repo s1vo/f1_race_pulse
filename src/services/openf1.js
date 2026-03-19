@@ -1,5 +1,13 @@
 import axios from 'axios';
 import { startLoading, stopLoading } from '../components/common/LoadingBar';
+import {
+  findCurrentMeeting,
+  findLastCompletedMeeting,
+  findMainRaceSession,
+  isSessionCompleted,
+  sortMeetingsByStart,
+  sortSessionsByStart,
+} from '../utils/raceSessions';
 
 const API = axios.create({
   baseURL: 'https://api.openf1.org/v1',
@@ -165,6 +173,33 @@ export const getLaps = (sessionKey, driverNumber) =>
 export const getLatestSession = () =>
   cachedGet('/sessions', { session_name: 'Race', year: new Date().getFullYear() });
 
+export async function getLatestCompletedRaceSession(now = new Date()) {
+  const meetings = await getMeetings();
+  const sortedMeetings = sortMeetingsByStart(meetings || []);
+  const currentMeeting = findCurrentMeeting(sortedMeetings, now);
+  const lastCompletedMeeting = findLastCompletedMeeting(sortedMeetings, now);
+  const candidateMeetings = [currentMeeting, lastCompletedMeeting]
+    .filter(Boolean)
+    .filter((meeting, index, list) =>
+      list.findIndex(candidate => candidate.meeting_key === meeting.meeting_key) === index
+    );
+
+  for (const meeting of candidateMeetings) {
+    const sessions = sortSessionsByStart(await getSessions(meeting.meeting_key));
+    const raceSession = findMainRaceSession(sessions);
+
+    if (!raceSession) continue;
+
+    if (currentMeeting?.meeting_key === meeting.meeting_key && !isSessionCompleted(raceSession, now)) {
+      continue;
+    }
+
+    return { meeting, sessions, raceSession };
+  }
+
+  return { meeting: null, sessions: [], raceSession: null };
+}
+
 const openf1 = {
   getMeetings,
   getSessions,
@@ -180,6 +215,7 @@ const openf1 = {
   getDrivers,
   getLaps,
   getLatestSession,
+  getLatestCompletedRaceSession,
 };
 
 export default openf1;

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { getDrivers, getStints, getMeetings, getSessions } from '../services/openf1';
+import { getDrivers, getLatestCompletedRaceSession, getStints } from '../services/openf1';
 import { useAppContext } from '../context/AppContext';
 import { getTeamColor } from '../utils/teams';
 import { getFlag } from '../utils/flags';
@@ -17,23 +17,15 @@ export default function Driver() {
   useEffect(() => {
     async function load() {
       try {
-        const meetings = await getMeetings();
-        const now = new Date();
-        const past = meetings
-          ?.filter(m => new Date(m.date_start) <= now)
-          .sort((a, b) => new Date(b.date_start) - new Date(a.date_start));
+        const { raceSession } = await getLatestCompletedRaceSession();
 
-        if (past && past.length > 0) {
-          const sess = await getSessions(past[0].meeting_key);
-          const race = sess?.find(s => s.session_name === 'Race') || sess?.[sess.length - 1];
-          if (race) {
-            const drvs = await getDrivers(race.session_key);
-            const drv = drvs?.find(d => String(d.driver_number) === String(driverNumber));
-            setDriver(drv);
+        if (raceSession) {
+          const drvs = await getDrivers(raceSession.session_key);
+          const drv = drvs?.find(d => String(d.driver_number) === String(driverNumber));
+          setDriver(drv);
 
-            const st = await getStints(race.session_key, driverNumber);
-            setStints(st || []);
-          }
+          const st = await getStints(raceSession.session_key, driverNumber);
+          setStints(st || []);
         }
       } catch {} finally {
         setLoading(false);

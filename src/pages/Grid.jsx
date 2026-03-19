@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { getStartingGrid, getMeetings, getSessions, getDrivers } from '../services/openf1';
+import { getDrivers, getLatestCompletedRaceSession, getStartingGrid } from '../services/openf1';
 import { useAppContext } from '../context/AppContext';
 import { getTeamColor } from '../utils/teams';
 import Skeleton from '../components/common/Skeleton';
@@ -18,16 +18,8 @@ export default function Grid() {
       try {
         let key = paramKey;
         if (!key) {
-          const meetings = await getMeetings();
-          const now = new Date();
-          const past = meetings
-            ?.filter(m => new Date(m.date_start) <= now)
-            .sort((a, b) => new Date(b.date_start) - new Date(a.date_start));
-          if (past && past.length > 0) {
-            const sess = await getSessions(past[0].meeting_key);
-            const race = sess?.find(s => s.session_name === 'Race');
-            if (race) key = race.session_key;
-          }
+          const { raceSession } = await getLatestCompletedRaceSession();
+          if (raceSession) key = raceSession.session_key;
         }
         if (key) {
           const [gridData, drvData] = await Promise.all([
