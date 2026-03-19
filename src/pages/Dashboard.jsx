@@ -5,6 +5,7 @@ import useLiveData from '../hooks/useLiveData';
 import { useAppContext } from '../context/AppContext';
 import { getDrivers, getRaceControl } from '../services/openf1';
 import { getCountdown, formatDriverNumber, formatSessionTime } from '../utils/time';
+import { formatDriverDisplayName } from '../utils/driverNames';
 import { getFlag } from '../utils/flags';
 import { getTeamColor } from '../utils/teams';
 import WeatherWidget from '../components/widgets/WeatherWidget';
@@ -209,7 +210,7 @@ export default function Dashboard() {
                   <div className="dashboard__podium-info">
                     <span className="dashboard__podium-team">{r.team_name}</span>
                     <span className="dashboard__podium-name">
-                      {r.broadcast_name || (r.first_name && r.last_name ? `${r.first_name[0]}. ${r.last_name.toUpperCase()}` : `#${r.driver_number}`)}
+                      {formatDriverDisplayName(r)}
                     </span>
                     {r.gap_to_leader !== 0 && r.gap_to_leader != null && (
                       <span className="dashboard__podium-gap">{formatGapDisplay(r.gap_to_leader)}</span>

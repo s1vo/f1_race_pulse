@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getDrivers, getLatestCompletedRaceSession, getSessionResults } from '../services/openf1';
 import { useAppContext } from '../context/AppContext';
+import { formatDriverDisplayName } from '../utils/driverNames';
 import { getTeamColor } from '../utils/teams';
 import { SkeletonTable } from '../components/common/Skeleton';
 import { showToast } from '../components/common/Toast';
@@ -110,7 +111,7 @@ export default function Results() {
                       <td className="results-table__pos">{r.position}</td>
                       <td className="results-table__driver">
                         <span className="results-table__team-bar" style={{ backgroundColor: teamColor }} />
-                        {r.broadcast_name || (r.first_name && r.last_name ? `${r.first_name[0]}. ${r.last_name.toUpperCase()}` : `#${r.driver_number}`)}
+                        {formatDriverDisplayName(r)}
                       </td>
                       <td className="results-table__team">{r.team_name || '—'}</td>
                       <td className="results-table__time">

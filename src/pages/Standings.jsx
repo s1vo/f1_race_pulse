@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import useStandings from '../hooks/useStandings';
 import { useAppContext } from '../context/AppContext';
+import { formatDriverDisplayName } from '../utils/driverNames';
 import { getTeamColor } from '../utils/teams';
 import { getFlag } from '../utils/flags';
 import { SkeletonTable } from '../components/common/Skeleton';
@@ -43,7 +44,7 @@ export default function Standings() {
           {drivers
             .map((d, i) => {
               const teamColor = getTeamColor(d.team_name);
-              const driverName = d.broadcast_name || [d.first_name, d.last_name?.toUpperCase()].filter(Boolean).join(' ') || `#${d.driver_number}`;
+              const driverName = formatDriverDisplayName(d);
               return (
                 <div
                   key={i}

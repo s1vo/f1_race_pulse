@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getDrivers, getLatestCompletedRaceSession, getStartingGrid } from '../services/openf1';
 import { useAppContext } from '../context/AppContext';
+import { formatDriverDisplayName } from '../utils/driverNames';
 import { getTeamColor } from '../utils/teams';
 import Skeleton from '../components/common/Skeleton';
 import './Grid.css';
@@ -75,7 +76,7 @@ export default function Grid() {
               <div className="grid-page__info">
                 <span className="grid-page__number">{String(g.driver_number).padStart(2, '0')}</span>
                 <span className="grid-page__name">
-                  {driver.name_acronym || driver.broadcast_name || `#${g.driver_number}`}
+                  {driver.name_acronym || formatDriverDisplayName(driver)}
                 </span>
                 <span className="grid-page__team">{driver.team_name || ''}</span>
               </div>
